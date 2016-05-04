@@ -14,11 +14,32 @@
       <div class="container">
         <h1>Rango says...</h1>
 
-        <img src="{%  static "images/rango.jpg"  %}" alt="Picture of Rango" /> <!-- New line -->
+        <div class="row">
+              <div class="col-md-8">
 
-        hello world! <strong> {% for i in list_items %}
-                                {{ i }}
-                              {% endfor %} </strong><br />
+
+                <strong>
+
+                  {% for i in list_items %}
+
+                      <p> {{ i }} </P>
+
+                  {% endfor %}
+                </strong>
+
+               </div>
+
+
+              <div class="col-md-4">
+
+                      <img src="{%  static "images/rango.jpg"  %}" alt="Picture of Rango" /> <!-- New line -->
+
+               </div>
+        </div>
+
+
+
+
         <a href="/rango">Rango Home</a><br />
 
       </div>

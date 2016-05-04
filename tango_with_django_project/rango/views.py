@@ -2,6 +2,10 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+from models import Page
+
+from models import Category
+
 def index(request):
     # Construct a dictionary to pass to the template engine as its context.
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!
@@ -17,7 +21,7 @@ def index(request):
 
 
 def about(request):
-
-    context_dict = { 'list_items': [2,3,4,5,6] }
+    p = Page.objects.all()
+    context_dict = { 'list_items': p }
      # reminder on templates u can't do python like print for the data, no need ...just do {{}}
     return render(request, 'rango/about.html', context_dict)
