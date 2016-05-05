@@ -17,7 +17,6 @@
             <ul class="nav nav-pills">
               <li role="presentation" class="active"><a href="/rango/about/">About</a></li>
               <li role="presentation"><a href="/rango/add_category/">Add a New Category</a></li>
-              <li role="presentation"><a href="/rango/login/">Login</a></li>
               {% if user.is_authenticated %}
                    <li role="presentation"><a href="/rango/restricted/">Restricted Page</a></li>
                    <li role="presentation"><a href="/rango/logout/">Logout</a></li>
@@ -42,7 +41,7 @@
                {% if categories %}
                   <ul class="list-group">
                       {% for category in categories %}
-                      
+
                         <li class="list-group-item"><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
                       <!-- <li>{{ category.name }}</li> -->
                       {% endfor %}
