@@ -1,0 +1,44 @@
+<! DOCTYPE html>
+ {% load staticfiles %}
+
+<html>
+<head>
+  <title> Rango Categories</title>
+  <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
+  <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
+</head>
+
+<body>
+<div class="container">
+    <div class="col-md-8">
+
+      {% if category %}
+        <h1>{{ category_name }}</h1>
+
+           <a href="/rango/category/{{ category.name }}/add_page/"> Add Page </a></li>
+
+            {% if pages %}
+            <ul>
+                {% for page in pages %}
+                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No pages currently in category.</strong>
+            {% endif %}
+        {% else %}
+            The specified category {{ category_name }} does not exist!
+        {% endif %}
+
+    <div>
+
+      <div class="col-md-4">
+
+      <div>
+
+
+
+
+</div>
+</body>
+</html>

@@ -6,7 +6,6 @@
 
     <head>
         <title>Rango</title>
-        <title>Rango</title>
         <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
         <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
 
@@ -15,11 +14,50 @@
     <body>
       <div class="container">
 
-        <h1>Rango says...</h1>
-        hello world! <strong>{{ boldmessage }}</strong><br />
-        <a href="/rango/about/">About</a><br />
-         <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" /> <!-- New line -->
 
+          <div class="col-md-12">
+            <ul class="nav nav-pills">
+              <li role="presentation" class="active"><a href="/rango/about/">About</a></li>
+              <li role="presentation"><a href="/rango/add_category/">Add a New Category</a></li>
+              <li role="presentation"><a href="/rango/login/">Login</a></li>
+              {% if user.is_authenticated %}
+                   <li role="presentation"><a href="/rango/restricted/">Restricted Page</a></li>
+                   <li role="presentation"><a href="/rango/logout/">Logout</a></li>
+              {% else %}
+                  <li role="presentation"><a href="/rango/register/">Register Here</a></li>
+                  <li role="presentation"><a href="/rango/login/">Login</a></li>
+              {% endif %}
+            <ul>
+          </div>
+
+
+          <div class="col-md-12">
+                  {% if user.is_authenticated %}
+                    <blockquote> Welcome :::: {{ user.username }}!</blockquote>
+                  {% else %}
+                    <blockquote> Welcome :::: <a href="#"> Sign in</a></blockquote>
+                  {% endif %}
+          </div>
+
+          <div class="col-md-8">
+               {% if categories %}
+                  <ul class="list-group">
+                      {% for category in categories %}
+                        <li class="list-group-item"><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
+                      {% endfor %}
+                  </ul>
+              {% else %}
+                  <strong>There are no categories present.</strong>
+              {% endif %}
+           </div>
+
+           <div class="col-md-4">
+             <ul class="list-group">
+             {%  for list_pages in most_viewed %}
+                  <li class="list-group-item">  {{ list_pages.title }}   </li>
+             {%  endfor %}
+              </ul>
+           </div>
        </div>
     </body>
 

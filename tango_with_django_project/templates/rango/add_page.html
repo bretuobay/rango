@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Rango</title>
+        <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
+        <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
+    </head>
+
+    <body>
+      <div class="container">
+
+        <h1>Add Page</h1>
+        <form id="page_form" method="post" action="/rango/category/{{ category_name_url }}/add_page/">
+           <div class="form-group">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                  {{ field.errors }}
+              </div>
+                <div class="form-group">
+                  {{ field.help_text }}
+                  {{ field }}
+                </div>
+
+            {% endfor %}
+          </div>
+            <input type="submit"  class="btn btn-primary" name="submit" value="Add Page" />
+
+        </form>
+
+      </div>
+    </body>
+
+</html>
