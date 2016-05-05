@@ -13,9 +13,6 @@
 
     <body>
       <div class="container">
-<<<<<<< HEAD
-
-
           <div class="col-md-12">
             <ul class="nav nav-pills">
               <li role="presentation" class="active"><a href="/rango/about/">About</a></li>
@@ -41,11 +38,13 @@
           </div>
 
           <div class="col-md-8">
+
                {% if categories %}
                   <ul class="list-group">
                       {% for category in categories %}
+                      
                         <li class="list-group-item"><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
-                      <li>{{ category.name }}</li>
+                      <!-- <li>{{ category.name }}</li> -->
                       {% endfor %}
                   </ul>
               {% else %}
