@@ -13,6 +13,7 @@
 
     <body>
       <div class="container">
+<<<<<<< HEAD
 
 
           <div class="col-md-12">
@@ -44,6 +45,7 @@
                   <ul class="list-group">
                       {% for category in categories %}
                         <li class="list-group-item"><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
+                      <li>{{ category.name }}</li>
                       {% endfor %}
                   </ul>
               {% else %}
@@ -57,6 +59,7 @@
                   <li class="list-group-item">  {{ list_pages.title }}   </li>
              {%  endfor %}
               </ul>
+
            </div>
        </div>
     </body>

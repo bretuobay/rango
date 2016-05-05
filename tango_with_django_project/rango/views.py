@@ -5,8 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from rango.models import Page, Category
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
-
-
+from rango.models import Page, Category
 #from rango.models import Category
 
 def index(request):
@@ -21,6 +20,7 @@ def index(request):
                 'categories' : category_list,
                 'most_viewed' : most_viewed
     }
+
 
     # Render the response and send it back!
     return render(request, 'rango/index.html', context_dict)
