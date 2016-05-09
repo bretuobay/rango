@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
-    <head>
-        <title>Rango</title>
-        <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
-        <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
-    </head>
+{% extends "rango/base.html" %}
 
-    <body>
-      <div class="container">
+{% block title %}
+
+        {{ catehory_name }}
+
+{%  endblock %}
+
+{% block body_block %}
+
 
         <h1>Add Page</h1>
         <form id="page_form" method="post" action="/rango/category/{{ category_name_url }}/add_page/">
@@ -33,7 +32,4 @@
 
         </form>
 
-      </div>
-    </body>
-
-</html>
+{% endblock %}

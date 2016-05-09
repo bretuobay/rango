@@ -1,18 +1,13 @@
-<!DOCTYPE html>
+{% extends "rango/base.html" %}
 
-{% load staticfiles %} <!-- New line -->
+{% block title %}
 
+        {{ catehory_name }}
 
-<html>
+{%  endblock %}
 
-    <head>
-        <title>Rango</title>
-          <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
-    </head>
+{% block body_block %}
 
-    <body>
-      <div class="container">
-        <h1>Rango says...</h1>
 
         <div class="row">
               <div class="col-md-8">
@@ -42,6 +37,4 @@
         <a href="/rango">Rango Home</a><br />
 
       </div>
-    </body>
-
-</html>
+    {% endblock %}

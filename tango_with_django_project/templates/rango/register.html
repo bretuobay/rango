@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-{% load staticfiles  %}
-<html>
-    <head>
-        <title>Rango</title>
-        <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
-        <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
-    </head>
 
-    <body>
-      <div class="container">
+{% extends "rango/base.html" %}
+
+{% block title %}
+
+        {{ catehory_name }}
+
+{%  endblock %}
+
+{% block body_block %}
 
         <h1>Register with Rango</h1>
 
@@ -17,8 +16,8 @@
           <a href="/rango/">Return to the homepage.</a><br />
         {% else %}
         Rango says: <strong>register here!</strong><br />
-   <div class="row">
 
+   <div class="row">
         <form id="user_form" class="form-horizontal" method="post" action="/rango/register/"
                 enctype="multipart/form-data">
 
@@ -42,6 +41,4 @@
         {% endif %}
     </div>
 
-      </div>
-    </body>
-</html>
+    {% endblock %}

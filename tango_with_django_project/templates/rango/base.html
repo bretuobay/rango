@@ -1,0 +1,60 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+          Rango -
+          {% block title %}
+           How to tango with Django
+          {% endblock %}
+        </title>
+
+        <link rel="stylesheet" href="{% static "css/base.css" %}" />
+        <link rel="stylesheet" href="{% static "css/form.css" %}" />
+        <script src="{% static "js/jquery.js" %}"></script>
+    </head>
+
+    <body>
+
+      <div class="container">
+
+          <div class="col-md-8">
+            <ul class="nav nav-pills">
+              <li role="presentation" class="active"><a href="/rango/about/">About</a></li>
+              <li role="presentation"><a href="/rango/add_category/">Add a New Category</a></li>
+              {% if user.is_authenticated %}
+                   <li role="presentation"><a href="/rango/restricted/">Restricted Page</a></li>
+                   <li role="presentation"><a href="/rango/logout/">Logout</a></li>
+              {% else %}
+                  <li role="presentation"><a href="/rango/register/">Register Here</a></li>
+                  <li role="presentation"><a href="/rango/login/">Login</a></li>
+              {% endif %}
+            <ul>
+          </div>
+
+
+          <div class="col-md-4">
+                  {% if user.is_authenticated %}
+                    <blockquote> Welcome :::: {{ user.username }}!</blockquote>
+                  {% else %}
+                    <blockquote> Welcome :::: <a href="#"> Sign in</a></blockquote>
+                  {% endif %}
+          </div>
+
+          <div class="col-md-12">
+
+            {% block body_block %}
+                
+            {% endblock %}
+
+          </div>
+
+
+        </div><!--- closes container -->
+
+
+    </body>
+</html>
