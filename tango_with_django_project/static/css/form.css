@@ -32,3 +32,10 @@ input:focus, textarea:focus {
     font-size: 14px;
     color: #FFFFFF;
     }
+
+    body > .container{
+      padding-top: 60px;
+    }
+    body> .footer.navbar-fixed-bottom {
+      padding: 20% 20%;
+    }

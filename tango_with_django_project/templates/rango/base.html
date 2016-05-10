@@ -23,10 +23,9 @@
 
           <div class="col-md-8">
             <ul class="nav nav-pills">
-              <li role="presentation" class="active"><a href="{% url 'about' %}">About</a></li>
+              <li role="presentation" class="active"><a href="{% url 'index' %}">Home</a></li>
               <li role="presentation"><a href="{% url 'add_category' %}">Add a New Category</a></li>
               {% if user.is_authenticated %}
-                   <li role="presentation"><a href="{% url 'restricted' %}">Restricted Page</a></li>
                    <li role="presentation"><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
               {% else %}
                   <li role="presentation"><a href="{% url 'registration_register' %}">Register Here</a></li>
@@ -40,7 +39,7 @@
                   {% if user.is_authenticated %}
                     <blockquote> Welcome :::: {{ user.username }}!</blockquote>
                   {% else %}
-                    <blockquote> <a href="{% url 'login' %}"> Sign in</a></blockquote>
+                    <blockquote> <a href="{% url 'auth_login' %}"> Sign in</a></blockquote>
                   {% endif %}
           </div>
 
@@ -61,8 +60,18 @@
           </div>
 
 
+ 
+        {% block footer %}
+
+        {% endblock %}
+
         </div><!--- closes container -->
 
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+            <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     </body>
 </html>
