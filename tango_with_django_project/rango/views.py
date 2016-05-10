@@ -6,6 +6,7 @@ from rango.models import Page, Category
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from rango.models import Page, Category
+from datetime import datetime
 #from rango.models import Category
 
 def index(request):
@@ -21,9 +22,28 @@ def index(request):
                 'most_viewed' : most_viewed
     }
 
+    visits = int(request.COOKIES.get('visits','1'))
+    reset_last_visit_time = False
+    response = render(request, 'rango/index.html', context_dict)
 
+    if 'last_visit' in request.COOKIES:
+        last_visit = request.COOKIES['last_visit']
+        #fix from 7 to 18 to fix format
+        last_visit_time = datetime.strptime(last_visit[:18],"%Y-%m-%d %H:%M:%S")
+
+        if(datetime.now()-last_visit_time).days > 0 :
+            visits = visits + 1
+            reset_last_visit_time = True
+    else:
+        reset_last_visit_time = True
+        context_dict['visits'] = visits
+        response = render(request, 'rango/index.html', context_dict)
+
+    if reset_last_visit_time:
+        response.set_cookie('last_visit',datetime.now())
+        response.set_cookie('visits',visits)
     # Render the response and send it back!
-    return render(request, 'rango/index.html', context_dict)
+    return response
 
 
 
@@ -119,6 +139,10 @@ def add_page(request, category_name_url):
 
 
 def register(request):
+
+    if request.session.test_cookie_worked():
+        print ">>>> TEST COOKIE WORKED!"
+        request.session.delete_test_cookie()
     # A boolean value for telling the template whether the registration was successful.
     # Set to False initially. Code changes value to True when registration succeeds.
     registered = False
