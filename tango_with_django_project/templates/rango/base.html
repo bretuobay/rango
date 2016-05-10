@@ -27,10 +27,10 @@
               <li role="presentation"><a href="{% url 'add_category' %}">Add a New Category</a></li>
               {% if user.is_authenticated %}
                    <li role="presentation"><a href="{% url 'restricted' %}">Restricted Page</a></li>
-                   <li role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
+                   <li role="presentation"><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
               {% else %}
-                  <li role="presentation"><a href="{% url 'register' %}">Register Here</a></li>
-                  <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
+                  <li role="presentation"><a href="{% url 'registration_register' %}">Register Here</a></li>
+                  <li role="presentation"><a href="{% url 'auth_login' %}">Login</a></li>
               {% endif %}
             <ul>
           </div>
@@ -40,13 +40,21 @@
                   {% if user.is_authenticated %}
                     <blockquote> Welcome :::: {{ user.username }}!</blockquote>
                   {% else %}
-                    <blockquote> Welcome :::: <a href="{% url 'login' %}"> Sign in</a></blockquote>
+                    <blockquote> <a href="{% url 'login' %}"> Sign in</a></blockquote>
                   {% endif %}
           </div>
 
           <div class="col-md-12">
 
             {% block body_block %}
+
+            {% endblock %}
+
+          </div>
+
+          <div class="col-md-12">
+           <!-- add this , expected by registration module -->
+            {% block content %}
 
             {% endblock %}
 

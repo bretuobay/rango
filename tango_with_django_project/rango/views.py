@@ -22,26 +22,28 @@ def index(request):
                 'most_viewed' : most_viewed
     }
 
-    visits = int(request.COOKIES.get('visits','1'))
+    visits = request.session.get('visits')
+    #if no visits yet, initiate?
+    if not visits:
+        visits = 1
     reset_last_visit_time = False
-    response = render(request, 'rango/index.html', context_dict)
 
-    if 'last_visit' in request.COOKIES:
-        last_visit = request.COOKIES['last_visit']
+    last_visit = request.session.get('last_visit')
+    if last_visit:
         #fix from 7 to 18 to fix format
         last_visit_time = datetime.strptime(last_visit[:18],"%Y-%m-%d %H:%M:%S")
 
-        if(datetime.now()-last_visit_time).days > 0 :
+        if(datetime.now()-last_visit_time).seconds > 0 :
             visits = visits + 1
             reset_last_visit_time = True
     else:
         reset_last_visit_time = True
-        context_dict['visits'] = visits
-        response = render(request, 'rango/index.html', context_dict)
 
     if reset_last_visit_time:
-        response.set_cookie('last_visit',datetime.now())
-        response.set_cookie('visits',visits)
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = visits
+
+    response = render(request,'rango/index.html',context_dict)
     # Render the response and send it back!
     return response
 
@@ -50,7 +52,12 @@ def index(request):
 
 def about(request):
     p = Page.objects.all()
-    context_dict = { 'list_items': p }
+    if request.session.get('visits'):
+        count = request.session.get('visits')
+    else:
+        count = 0
+
+    context_dict = { 'list_items': p, 'page_visits':count }
      # reminder on templates u can't do python like print for the data, no need ...just do {{}}
     return render(request, 'rango/about.html', context_dict)
 
